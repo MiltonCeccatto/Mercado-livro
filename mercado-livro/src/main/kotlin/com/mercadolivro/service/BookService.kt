@@ -51,5 +51,15 @@ class BookService(
         bookRepository.saveAll(books)
     }
 
+    fun findAllByIds(bookIds: Set<Int>): List<BookModel>{
+        // spring ja entende que esta sendo passado uma lista para ele e ele vai ter que procurar por todos
+        return bookRepository.findAllById(bookIds).toList()
+    }
+
+    fun purchase(books: MutableList<BookModel>) {
+        books.map { it.status = BookStatus.VENDIDO }
+        bookRepository.saveAll(books)
+    }
+
 
 }
