@@ -8,5 +8,6 @@ interface CustomerRepository : CrudRepository<CustomerModel, Int>{
     /** Pesquisar mais em spring like queries */
     fun findByNameContaining(name: String): List<CustomerModel>
     fun existsByEmail(email: String): Boolean
+    fun findByEmail(email: String): CustomerModel?// ;pode ser null porque alguem pode mandar email errado
 
 }
