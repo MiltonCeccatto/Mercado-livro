@@ -6,10 +6,12 @@ import com.mercadolivro.controller.request.PutBookRequest
 import com.mercadolivro.controller.request.PutCustomerRequest
 import com.mercadolivro.controller.response.BookResponse
 import com.mercadolivro.controller.response.CustomerResponse
+import com.mercadolivro.controller.response.PageResponse
 import com.mercadolivro.enums.BookStatus
 import com.mercadolivro.enums.CustomerStatus
 import com.mercadolivro.model.BookModel
 import com.mercadolivro.model.CustomerModel
+import org.springframework.data.domain.Page
 
 /** Podem ser criadas funçoes para outras classes ou tipos como strings e esta função então vai funcionar
  * para todas estas classes ou tipos
@@ -70,8 +72,11 @@ fun BookModel.toResponse(): BookResponse {
     )
 }
 
-
-fun String.primeiraLetra():Char {
-    return this[0]
+fun<T> Page<T>.toPageResponse(): PageResponse<T>{
+    return PageResponse(
+        this.content,
+        this.totalPages,
+        this.totalElements,
+        this.number,
+    )
 }
-

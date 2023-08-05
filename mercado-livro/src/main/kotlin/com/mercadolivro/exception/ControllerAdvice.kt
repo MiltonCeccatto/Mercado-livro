@@ -5,6 +5,7 @@ import com.mercadolivro.controller.response.FieldErrorResponse
 import com.mercadolivro.enums.Errors
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.AccessDeniedException
 import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
@@ -53,4 +54,17 @@ class ControllerAdvice {
 
         return ResponseEntity(erro, HttpStatus.BAD_REQUEST)
     }
+
+    @ExceptionHandler(AccessDeniedException::class)
+    fun handleAccessDeniedException(ex: AccessDeniedException, request: WebRequest): ResponseEntity<ErrorResponse> {
+        val erro =  ErrorResponse(
+            httpCode = HttpStatus.FORBIDDEN.value(),
+            message = Errors.ML0000.message,//podemos nos mesmos passar a mensagem e criar um error code para que possamos identificar o erro
+            internalCode = Errors.ML0000.code,
+            errors = null
+        )
+
+        return ResponseEntity(erro, HttpStatus.FORBIDDEN)
+    }
+
 }

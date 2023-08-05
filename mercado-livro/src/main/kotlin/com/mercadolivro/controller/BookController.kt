@@ -3,7 +3,9 @@ package com.mercadolivro.controller
 import com.mercadolivro.controller.request.PostBookRequest
 import com.mercadolivro.controller.request.PutBookRequest
 import com.mercadolivro.controller.response.BookResponse
+import com.mercadolivro.controller.response.PageResponse
 import com.mercadolivro.extension.toBookModel
+import com.mercadolivro.extension.toPageResponse
 import com.mercadolivro.extension.toResponse
 import com.mercadolivro.service.BookService
 import com.mercadolivro.service.CustomerService
@@ -18,7 +20,7 @@ import javax.validation.Valid
  * Link para os tipos de retorno de uma API
  * https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Status */
 @RestController
-@RequestMapping("book")
+@RequestMapping("books")
 class BookController(
     private val bookService: BookService,
     private val customerService: CustomerService
@@ -37,8 +39,8 @@ class BookController(
      * size = 10 ++ seria o número de elementos que ele vai retornar
      * */
     @GetMapping
-    fun findAll(@PageableDefault(page = 0, size = 10)pageable: Pageable): Page<BookResponse> {
-        return bookService.findAll(pageable).map { it.toResponse() }
+    fun findAll(@PageableDefault(page = 0, size = 10)pageable: Pageable): PageResponse<BookResponse> {
+        return bookService.findAll(pageable).map { it.toResponse() }.toPageResponse()
     }
 
     @GetMapping("/active")
