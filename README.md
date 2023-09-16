@@ -15,6 +15,7 @@ Foram abordados assuntos como:
 - Testes unitários
 - Características e funcionalidades do Kotlin
 - Utilização do Spring
+- Utilização do Flayway: O Flyway é um framework que permite o versionamento e gerenciamento do Banco de dados, com ele podemos controlar as versões do banco de dados.
 
 ### 📋 Pré-requisitos
 
@@ -22,10 +23,11 @@ Foram abordados assuntos como:
 + Precisa ter o MySQL Workbench instalado
   - deve ser alterado username e passoword em
   - mercado-livro/src/main/resources/application-dev.yml
+  - para a sua própria password e username de seu banco de dados
 + Uma IDE de sua escolha para abrir e rodar o projeto
 
 ## 🛠️ Construído com
 
 * Kotlin - linguagem de programação
 * Spring Boot - Framework 
-* Gradle - Gerente de Dependência
+* Gradle - Gerente de Dependências
